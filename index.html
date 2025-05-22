@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5-Minute Micro-Workout Generator | Quick Desk Exercises & Fitness Routines</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Generate personalized 5-minute workout routines perfect for busy people. No equipment needed! Quick desk exercises, stretches, and cardio workouts you can do anywhere.">
+    <meta name="keywords" content="5 minute workout, desk exercises, quick fitness, micro workout, office exercises, bodyweight workout, no equipment workout, busy people fitness">
+    <meta name="author" content="Micro-Workout Generator">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags for Social Sharing -->
+    <meta property="og:title" content="5-Minute Micro-Workout Generator - Quick Fitness for Busy People">
+    <meta property="og:description" content="Get personalized 5-minute workouts you can do anywhere! Perfect for desk workers and busy schedules. No equipment required.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourusername.github.io/micro-workout-generator">
+    <meta property="og:image" content="https://yourusername.github.io/micro-workout-generator/workout-preview.png">
+    <meta property="og:image:alt" content="Micro-Workout Generator - 5-minute fitness routines">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="5-Minute Micro-Workout Generator">
+    <meta name="twitter:description" content="Quick personalized workouts for busy people. No equipment needed!">
+    <meta name="twitter:image" content="https://yourusername.github.io/micro-workout-generator/workout-preview.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💪</text></svg>">
+    
+    <!-- Additional SEO -->
+    <link rel="canonical" href="https://yourusername.github.io/micro-workout-generator">
+    <meta name="theme-color" content="#667eea">
+    
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Micro-Workout Generator",
+        "description": "Generate personalized 5-minute workout routines for busy people with no equipment required",
+        "url": "https://yourusername.github.io/micro-workout-generator",
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "author": {
+            "@type": "Organization",
+            "name": "Micro-Workout Generator"
+        }
+    }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+            font-weight: bold;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .controls {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        select, input {
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            background: white;
+            transition: border-color 0.3s ease;
+        }
+
+        select:focus, input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .generate-btn {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .generate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.4);
+        }
+
+        .workout-container {
+            margin-top: 30px;
+            display: none;
+        }
+
+        .workout-header {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .workout-title {
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+
+        .workout-duration {
+            opacity: 0.9;
+        }
+
+        .exercises {
+            display: grid;
+            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        }
+
+        .exercise {
+            background: white;
+            border: 2px solid #f0f0f0;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: left;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .exercise:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-color: #667eea;
+        }
+
+        .exercise-number {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: #667eea;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .exercise-name {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+            padding-right: 40px;
+        }
+
+        .exercise-details {
+            color: #666;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .exercise-description {
+            color: #777;
+            font-size: 0.95em;
+            line-height: 1.4;
+        }
+
+        .timer-section {
+            background: linear-gradient(45deg, #ffd89b, #19547b);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 30px;
+            display: none;
+        }
+
+        .timer-display {
+            font-size: 3em;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .timer-controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .timer-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .timer-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .stats {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 15px;
+            display: none;
+        }
+
+        .stats h3 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .exercises {
+                grid-template-columns: 1fr;
+            }
+            
+            .timer-display {
+                font-size: 2.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💪 5-Minute Micro-Workout Generator</h1>
+        <p class="subtitle">Personalized quick exercise routines for busy people • No equipment needed</p>
+        
+        <div class="controls">
+            <div class="control-group">
+                <label for="intensity">Intensity Level</label>
+                <select id="intensity">
+                    <option value="low">Low - Gentle stretches</option>
+                    <option value="medium" selected>Medium - Light cardio</option>
+                    <option value="high">High - Intense cardio</option>
+                </select>
+            </div>
+            
+            <div class="control-group">
+                <label for="focus">Focus Area</label>
+                <select id="focus">
+                    <option value="full-body" selected>Full Body</option>
+                    <option value="upper-body">Upper Body</option>
+                    <option value="lower-body">Lower Body</option>
+                    <option value="core">Core & Abs</option>
+                    <option value="cardio">Cardio Blast</option>
+                    <option value="stretching">Stretching</option>
+                </select>
+            </div>
+            
+            <div class="control-group">
+                <label for="equipment">Equipment</label>
+                <select id="equipment">
+                    <option value="none" selected>No Equipment</option>
+                    <option value="chair">Just a Chair</option>
+                    <option value="basic">Basic (Resistance band/Weights)</option>
+                </select>
+            </div>
+        </div>
+        
+        <button class="generate-btn" onclick="generateWorkout()">
+            🎯 Generate My Workout
+        </button>
+        
+        <div id="workout" class="workout-container">
+            <div class="workout-header">
+                <div class="workout-title" id="workoutTitle"></div>
+                <div class="workout-duration">Total Duration: 5 minutes</div>
+            </div>
+            
+            <div id="exercises" class="exercises"></div>
+            
+            <div class="timer-section" id="timerSection">
+                <h3>Workout Timer</h3>
+                <div class="timer-display" id="timerDisplay">5:00</div>
+                <div class="timer-controls">
+                    <button class="timer-btn" onclick="startTimer()">▶️ Start</button>
+                    <button class="timer-btn" onclick="pauseTimer()">⏸️ Pause</button>
+                    <button class="timer-btn" onclick="resetTimer()">🔄 Reset</button>
+                </div>
+            </div>
+            
+            <div class="stats" id="stats">
+                <h3>📊 Workout Stats</h3>
+                <div class="stat-item">
+                    <span>Estimated Calories Burned:</span>
+                    <span id="calories">25-40</span>
+                </div>
+                <div class="stat-item">
+                    <span>Muscle Groups Targeted:</span>
+                    <span id="muscleGroups">Full Body</span>
+                </div>
+                <div class="stat-item">
+                    <span>Equipment Needed:</span>
+                    <span id="equipmentNeeded">None</span>
+                </div>
+            </div>
+            
+            <!-- Social Sharing Section -->
+            <div style="margin-top: 30px; padding: 20px; background: rgba(102, 126, 234, 0.1); border-radius: 15px; text-align: center;">
+                <h3 style="color: #333; margin-bottom: 15px;">💫 Share Your Workout</h3>
+                <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                    <button onclick="shareWorkout('twitter')" style="background: #1da1f2; color: white; border: none; padding: 10px 15px; border-radius: 20px; cursor: pointer; font-size: 14px;">
+                        🐦 Share on Twitter
+                    </button>
+                    <button onclick="shareWorkout('facebook')" style="background: #4267b2; color: white; border: none; padding: 10px 15px; border-radius: 20px; cursor: pointer; font-size: 14px;">
+                        📘 Share on Facebook
+                    </button>
+                    <button onclick="copyLink()" style="background: #667eea; color: white; border: none; padding: 10px 15px; border-radius: 20px; cursor: pointer; font-size: 14px;">
+                        🔗 Copy Link
+                    </button>
+                </div>
+                <p style="margin-top: 10px; color: #666; font-size: 14px;">Help others discover quick 5-minute workouts!</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const exercises = {
+            'low': {
+                'full-body': {
+                    'none': [
+                        { name: 'Gentle Arm Circles', duration: '1 minute', description: 'Stand with arms extended, make small circles forward then backward' },
+                        { name: 'Standing Side Stretch', duration: '1 minute', description: 'Reach one arm overhead and lean to the side, hold for 15 seconds each side' },
+                        { name: 'Calf Raises', duration: '1 minute', description: 'Rise up on your toes, hold for 2 seconds, lower slowly' },
+                        { name: 'Shoulder Shrugs', duration: '1 minute', description: 'Lift shoulders to ears, hold 3 seconds, release slowly' },
+                        { name: 'Deep Breathing Stretch', duration: '1 minute', description: 'Arms overhead on inhale, sweep down on exhale' }
+                    ],
+                    'chair': [
+                        { name: 'Seated Spinal Twist', duration: '1 minute', description: 'Sit tall, rotate torso left and right slowly' },
+                        { name: 'Chair-Supported Calf Raises', duration: '1 minute', description: 'Hold chair back, rise on toes slowly' },
+                        { name: 'Seated Leg Extensions', duration: '1 minute', description: 'Extend one leg straight, hold 3 seconds, switch' },
+                        { name: 'Shoulder Blade Squeezes', duration: '1 minute', description: 'Sit forward, squeeze shoulder blades together' },
+                        { name: 'Ankle Circles', duration: '1 minute', description: 'Lift feet slightly, make circles with ankles' }
+                    ]
+                },
+                'upper-body': {
+                    'none': [
+                        { name: 'Wall Push-Ups', duration: '1 minute', description: 'Face wall arm\'s length away, push against wall slowly' },
+                        { name: 'Arm Swings', duration: '1 minute', description: 'Swing arms in large circles, forward and backward' },
+                        { name: 'Neck Stretches', duration: '1 minute', description: 'Gently tilt head side to side, hold 10 seconds each' },
+                        { name: 'Chest Opener', duration: '1 minute', description: 'Clasp hands behind back, lift chest and squeeze' },
+                        { name: 'Wrist Circles', duration: '1 minute', description: 'Extend arms, make circles with wrists both directions' }
+                    ]
+                },
+                'stretching': [
+                    { name: 'Standing Forward Fold', duration: '1 minute', description: 'Bend forward from hips, let arms hang loosely' },
+                    { name: 'Standing Quad Stretch', duration: '1 minute', description: 'Hold ankle behind you, use wall for balance if needed' },
+                    { name: 'Cross-Body Shoulder Stretch', duration: '1 minute', description: 'Pull arm across chest, hold with opposite hand' },
+                    { name: 'Standing Figure-Four', duration: '1 minute', description: 'Place ankle on opposite knee, sit back gently' },
+                    { name: 'Standing Backbend', duration: '1 minute', description: 'Hands on lower back, gently arch backward' }
+                ]
+            },
+            'medium': {
+                'full-body': {
+                    'none': [
+                        { name: 'Jumping Jacks', duration: '45 seconds', description: 'Classic cardio move - jump feet apart while raising arms overhead' },
+                        { name: 'Bodyweight Squats', duration: '45 seconds', description: 'Feet shoulder-width apart, lower like sitting in chair' },
+                        { name: 'Push-Ups (modified if needed)', duration: '45 seconds', description: 'Standard or knee push-ups, maintain straight line' },
+                        { name: 'High Knees in Place', duration: '45 seconds', description: 'March in place bringing knees to waist height' },
+                        { name: 'Mountain Climbers', duration: '45 seconds', description: 'Plank position, alternate bringing knees to chest quickly' },
+                        { name: 'Cool Down Stretches', duration: '45 seconds', description: 'Gentle stretches for major muscle groups' }
+                    ],
+                    'chair': [
+                        { name: 'Chair Step-Ups', duration: '45 seconds', description: 'Step up onto chair (if sturdy), alternate legs' },
+                        { name: 'Chair Squats', duration: '45 seconds', description: 'Sit and stand from chair without using hands' },
+                        { name: 'Chair Dips', duration: '45 seconds', description: 'Hands on chair edge, lower and raise body' },
+                        { name: 'Standing Chair Crunches', duration: '45 seconds', description: 'Hold chair back, bring knee to opposite elbow' },
+                        { name: 'Chair-Supported Lunges', duration: '45 seconds', description: 'Hold chair for balance, lunge backward alternating legs' },
+                        { name: 'Seated Leg Raises', duration: '45 seconds', description: 'Sit in chair, extend both legs straight out' }
+                    ]
+                },
+                'cardio': {
+                    'none': [
+                        { name: 'Burpees (modified)', duration: '30 seconds', description: 'Squat, step back to plank, step forward, jump up' },
+                        { name: 'Speed Skaters', duration: '45 seconds', description: 'Lateral jumps from side to side like speed skating' },
+                        { name: 'Butt Kickers', duration: '45 seconds', description: 'Jog in place kicking heels toward glutes' },
+                        { name: 'Cross Jacks', duration: '45 seconds', description: 'Like jumping jacks but cross arms and legs' },
+                        { name: 'Squat Jumps', duration: '30 seconds', description: 'Regular squat but jump up explosively at the top' },
+                        { name: 'Plank Jacks', duration: '45 seconds', description: 'In plank position, jump feet apart and together' }
+                    ]
+                },
+                'core': {
+                    'none': [
+                        { name: 'Plank Hold', duration: '45 seconds', description: 'Hold plank position, keep body straight from head to toe' },
+                        { name: 'Bicycle Crunches', duration: '45 seconds', description: 'Lying down, bring opposite elbow to knee' },
+                        { name: 'Dead Bug', duration: '45 seconds', description: 'On back, extend opposite arm and leg slowly' },
+                        { name: 'Russian Twists', duration: '45 seconds', description: 'Seated, lean back slightly, rotate torso side to side' },
+                        { name: 'Leg Raises', duration: '45 seconds', description: 'Lying down, raise straight legs to 90 degrees' },
+                        { name: 'Side Plank (each side)', duration: '30 seconds each', description: 'Hold side plank, switch sides halfway' }
+                    ]
+                }
+            },
+            'high': {
+                'full-body': {
+                    'none': [
+                        { name: 'Burpees', duration: '30 seconds', description: 'Full burpee - squat, jump back, push-up, jump forward, jump up' },
+                        { name: 'Jump Squats', duration: '45 seconds', description: 'Explosive squat jumps, land softly' },
+                        { name: 'Mountain Climbers', duration: '45 seconds', description: 'Fast alternating knees to chest in plank position' },
+                        { name: 'High-Intensity Jumping Jacks', duration: '45 seconds', description: 'Fast-paced jumping jacks with full arm extension' },
+                        { name: 'Plank to Down Dog', duration: '45 seconds', description: 'Alternate between plank and downward dog position' },
+                        { name: 'Sprint in Place', duration: '30 seconds', description: 'Maximum effort running in place with high knees' }
+                    ]
+                },
+                'cardio': {
+                    'none': [
+                        { name: 'Tabata Burpees', duration: '40 seconds', description: '20 seconds max effort, 10 seconds rest, repeat' },
+                        { name: 'Plyometric Lunges', duration: '45 seconds', description: 'Jump and switch legs in lunge position' },
+                        { name: 'Tuck Jumps', duration: '30 seconds', description: 'Jump up bringing knees to chest' },
+                        { name: 'Bear Crawl', duration: '45 seconds', description: 'Crawl forward on hands and feet, keep knees low' },
+                        { name: 'Star Jumps', duration: '45 seconds', description: 'Jump spreading arms and legs wide like a star' },
+                        { name: 'Fast Feet', duration: '45 seconds', description: 'Quick small steps in place as fast as possible' }
+                    ]
+                }
+            }
+        };
+
+        let timer;
+        let timeLeft = 300; // 5 minutes in seconds
+        let isRunning = false;
+
+        function generateWorkout() {
+            const intensity = document.getElementById('intensity').value;
+            const focus = document.getElementById('focus').value;
+            const equipment = document.getElementById('equipment').value;
+
+            // Get appropriate exercise list
+            let exerciseList = [];
+            
+            if (exercises[intensity] && exercises[intensity][focus] && exercises[intensity][focus][equipment]) {
+                exerciseList = exercises[intensity][focus][equipment];
+            } else if (exercises[intensity] && exercises[intensity][focus]) {
+                exerciseList = exercises[intensity][focus]['none'] || Object.values(exercises[intensity][focus])[0];
+            } else if (exercises[intensity] && exercises[intensity]['full-body']) {
+                exerciseList = exercises[intensity]['full-body'][equipment] || exercises[intensity]['full-body']['none'];
+            } else {
+                // Fallback to medium full-body
+                exerciseList = exercises['medium']['full-body']['none'];
+            }
+
+            // Shuffle and select exercises
+            const shuffled = [...exerciseList].sort(() => 0.5 - Math.random());
+            const selectedExercises = shuffled.slice(0, Math.min(5, shuffled.length));
+
+            // Display workout
+            displayWorkout(selectedExercises, intensity, focus, equipment);
+        }
+
+        function displayWorkout(exerciseList, intensity, focus, equipment) {
+            const workoutContainer = document.getElementById('workout');
+            const workoutTitle = document.getElementById('workoutTitle');
+            const exercisesContainer = document.getElementById('exercises');
+            const timerSection = document.getElementById('timerSection');
+            const statsSection = document.getElementById('stats');
+
+            // Set title
+            const intensityNames = { low: 'Gentle', medium: 'Energizing', high: 'High-Intensity' };
+            const focusNames = { 
+                'full-body': 'full body', 
+                'upper-body': 'upper body', 
+                'lower-body': 'lower body', 
+                'core': 'core', 
+                'cardio': 'cardio', 
+                'stretching': 'stretching' 
+            };
+            workoutTitle.textContent = `${intensityNames[intensity]} ${focusNames[focus]} workout`;
+
+            // Clear and populate exercises
+            exercisesContainer.innerHTML = '';
+            exerciseList.forEach((exercise, index) => {
+                const exerciseDiv = document.createElement('div');
+                exerciseDiv.className = 'exercise';
+                exerciseDiv.innerHTML = `
+                    <div class="exercise-number">${index + 1}</div>
+                    <div class="exercise-name">${exercise.name}</div>
+                    <div class="exercise-details">${exercise.duration}</div>
+                    <div class="exercise-description">${exercise.description}</div>
+                `;
+                exercisesContainer.appendChild(exerciseDiv);
+            });
+
+            // Update stats
+            const calories = { low: '15-25', medium: '25-40', high: '40-60' };
+            const muscleGroups = { 
+                'full-body': 'Full Body', 
+                'upper-body': 'Arms, Chest, Shoulders', 
+                'lower-body': 'Legs, Glutes', 
+                'core': 'Core, Abs', 
+                'cardio': 'Cardiovascular System', 
+                'stretching': 'Full Body Flexibility' 
+            };
+            const equipmentNames = { none: 'None', chair: 'Chair', basic: 'Basic Equipment' };
+
+            document.getElementById('calories').textContent = calories[intensity];
+            document.getElementById('muscleGroups').textContent = muscleGroups[focus];
+            document.getElementById('equipmentNeeded').textContent = equipmentNames[equipment];
+
+            // Show all sections
+            workoutContainer.style.display = 'block';
+            timerSection.style.display = 'block';
+            statsSection.style.display = 'block';
+
+            // Reset timer
+            resetTimer();
+
+            // Smooth scroll to workout
+            workoutContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function startTimer() {
+            if (!isRunning) {
+                isRunning = true;
+                timer = setInterval(() => {
+                    timeLeft--;
+                    updateTimerDisplay();
+                    
+                    if (timeLeft <= 0) {
+                        clearInterval(timer);
+                        isRunning = false;
+                        alert('🎉 Workout Complete! Great job!');
+                        resetTimer();
+                    }
+                }, 1000);
+            }
+        }
+
+        function pauseTimer() {
+            if (isRunning) {
+                clearInterval(timer);
+                isRunning = false;
+            }
+        }
+
+        function resetTimer() {
+            clearInterval(timer);
+            isRunning = false;
+            timeLeft = 300;
+            updateTimerDisplay();
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById('timerDisplay').textContent = 
+                `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        // Social sharing functions
+        function shareWorkout(platform) {
+            const url = encodeURIComponent(window.location.href);
+            const text = encodeURIComponent("Just generated an awesome 5-minute workout! 💪 Perfect for busy schedules - check out this free Micro-Workout Generator:");
+            
+            let shareUrl = '';
+            if (platform === 'twitter') {
+                shareUrl = `https://twitter.com/intent/tweet?text=${text}&url=${url}`;
+            } else if (platform === 'facebook') {
+                shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+            }
+            
+            if (shareUrl) {
+                window.open(shareUrl, '_blank', 'width=600,height=400');
+            }
+        }
+
+        function copyLink() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                alert('🎉 Link copied to clipboard! Share it with friends!');
+            }).catch(() => {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = window.location.href;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                alert('🎉 Link copied to clipboard! Share it with friends!');
+            });
+        }
+
+        // Generate initial workout
+        window.onload = function() {
+            generateWorkout();
+        };
+    </script>
+</body>
+</html>
